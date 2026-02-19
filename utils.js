@@ -22,3 +22,5 @@ function orderAsc(arrayOfNumber) {
 const MIN_VALUE = 1;
 
 export { even, orderAsc, capitalize, MIN_VALUE };
+
+// Modification ajoutée
