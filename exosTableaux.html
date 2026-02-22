@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script type="module">
+        
+            console.log("\n\n\n\n\n_____________filtrer > 2____________\n\n\n\n")
+            import {filtrerElementsSuperieursA2} from "./fonctions.js"
+            const tableau1=[1,2,3,4,5]
+            console.log(filtrerElementsSuperieursA2(tableau1))
+
+        
+            console.log("\n\n\n\n\n_____________Inverser l'ordre____________\n\n\n\n")
+            import {inverserOrdre} from "./fonctions.js"
+            const lettres=["A","B","C"]
+            console.table(inverserOrdre(lettres))
+
+            
+            console.log("\n\n\n\n\n_____________trouver le plus long mot____________\n\n\n\n")
+            import {motLePlusLong} from "./fonctions.js"
+            const chaine1="Le Javascript est un langage de programmation"
+            console.log(motLePlusLong(chaine1))
+
+            console.log("\n\n\n______Masquer un numéro sauf les 4 derniers chiffres________\n\n")
+            import {masquerNumeroDeTelephone} from "./fonctions.js"
+             const numero1="123456"
+            console.log(masquerNumeroDeTelephone(numero1))
+
+            console.log("\n\n\n______palindrome________\n\n")
+            import {estUnPalindrome} from "./fonctions.js"
+             const mot1="javascript"
+             const mot2="ekitike"
+             console.log(estUnPalindrome(mot1))
+             console.log(estUnPalindrome(mot2))
+
+             console.log("\n\n\n______trouver les #________\n\n")
+             import {findHashtag} from "./fonctions.js"
+             const mot="#JS #DEV"
+             console.log(findHashtag(mot))
+    </script>
+</body>
+</html>
