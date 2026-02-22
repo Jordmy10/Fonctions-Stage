@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        section{
+            display: flex;
+            gap: 40px;
+            justify-content: center;
+        }
+
+        section > *{
+            color: gold;
+            text-shadow: 15px 10px 10px ;
+            font-size: 75px;
+            animation: rainbow 7s linear 0s infinite normal forwards;
+        }
+
+        @keyframes rainbow {
+            0%{
+                color:gold ;
+            }
+            15%{
+                color: red;
+            }
+            30%{
+                color: orange;
+            }
+            45%{
+                color:green ;
+            }
+            60%{
+                color: blue;
+            }
+            75%{
+                color:blueviolet ;
+            }
+            100%{
+                color: palevioletred;
+            }
+            
+        }
+    </style>
+</head>
+<body>
+    <section >
+        <p id="hrs" style="width: 100px; height: 30px;">00</p>
+        <p id="mins" style="width: 100px; height: 30px;">00</p>
+        <p id="secs" style="width: 100px; height: 30px;">00</p>
+    </section>
+
+
+<script src="timer.js" ></script>    
+</body>
+</html>
