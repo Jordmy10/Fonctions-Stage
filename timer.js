@@ -1,4 +1,3 @@
-
     function timeAct(){
         function formaterPeriode(periode){
             return ("0" + periode).slice(-2)
@@ -11,7 +10,6 @@
         const styleHeure=document.getElementById("heureActu")
         styleHeure.textContent= heureFinale
     }
-
     setInterval(timeAct,1000)
 
     
