@@ -59,10 +59,11 @@ export function inverserOrdre(tableau){
 
 // trouver les hashtags
 export function findHashtag(chaine){
-    const tabChaine=chaine.split("")
-    tabChaine.forEach(function(valeur){
-        return valeur.indexOf("#")
-    })
+    chaine.forEach(function(){
+      if(chaine.includes("#") ){
+        return chaine.indexOf("#")
+      }
+    })   
 }
 
 export {sommeDesElementsDuTableau, capitalizeWordAndSentence, trierParOrdreCroissant, filtrerNombresPairs}
