@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+          margin: 0;
+          padding: 0;
+          box-sizing: border-box; 
+        }
+
+        html,body{
+            height: 100%;
+        }
+
+        body{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        #heureActu{
+            /* align-items: center; */
+            color: gold;
+            font-size: 75px;
+            animation: rainbow 7s linear 0s infinite normal forwards;
+        }
+        
+
+        
+            
+
+        @keyframes rainbow {
+            0%{
+                color:gold ;
+            }
+            15%{
+                color: red;
+            }
+            30%{
+                color: orange;
+            }
+            45%{
+                color:green ;
+            }
+            60%{
+                color: blue;
+            }
+            75%{
+                color:blueviolet ;
+            }
+            100%{
+                color: palevioletred;
+            }
+            
+        }
+    </style>
+</head>
+<body>
+    
+      <time id="heureActu"></time>
+    
+
+
+<script src="timer.js" ></script>    
+</body>
+</html>
