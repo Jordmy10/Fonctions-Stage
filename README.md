@@ -109,4 +109,4 @@ On récupère l'heure grace à ``new Date()`` puis on définit l'heure, la minut
  styleHeure=document.getElementById("heureActu")
  ```
 Puis on définit l'heure finale en concatenant les 3 périodes et on l'affecte à l'objet du DOM grace à ``textContent``.
-![Capture](./Capture.mp4)
+<video src="Capture.mp4" controls></video>
