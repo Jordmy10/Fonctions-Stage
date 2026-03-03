@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html,
+        body {
+            height: 100vh;
+        }
+
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        body>h1 {
+            text-emphasis: "🔅";
+        }
+
+        .zoneTexte {
+            height: 50px;
+            width: 53vw;
+            border: solid 2px aqua;
+            border-radius: 10px;
+            padding-left: 25px;
+            font-size: 14px;
+            font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+        }
+
+        .zoneTexte:focus {
+            outline: 1px solid aqua;
+        }
+
+        .styliste {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 60vw;
+            list-style-type: none;
+            height: 50px;
+            border: solid 2px thistle;
+            background-color: #fff;
+            border-radius: 8px;
+            animation: entree 0.4s linear 0s 1 forwards normal;
+            margin-top: 10px;
+            padding: 10px;
+            font-size: 16px;
+            font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+        }
+
+        @keyframes entree {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+                height: 0%;
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+                height: 100%;
+            }
+        }
+
+        .croix {
+            cursor: pointer;
+            background: none;
+            border: none;
+            margin: 8px;
+        }
+
+        #ajout {
+            height: 50px;
+            border-radius: 7px;
+            background-color: aqua;
+            font-family: Georgia, 'Times New Roman', Times, serif;
+            font-weight: bold;
+            font-size: 13px;
+            width: 7vw;
+            border: none;
+        }
+
+        @media (max-width: 1024px) {
+            #ajout {
+                height: 50px;
+                border-radius: 5px;
+                background-color: aqua;
+                font-family: sans-serif;
+                font-size: 0.7rem;
+                width: 10vw;
+            }
+        }
+
+        div {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 15px;
+            height: 50px;
+            width: 15vw;
+            background-color: #fff;
+            border: solid 2px thistle;
+            border-radius: 8px;
+            margin-top: 10px;
+            font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Liste de la salle</h1>
+    <form action="" id="form">
+        <input type="text" class="zoneTexte" placeholder="Entrez quelque chose" required>
+        <input type="submit" value="AJOUTER" id="ajout" onclick="ajouterEtudiant()">
+        <div>Nombre d'étudiants: <em>0</em></div>
+        <ul id="liste">
+        </ul>
+    </form>
+    <script>
+        const zoneDeTexte = document.querySelector("input")
+        const ul = document.getElementById("liste")
+        const bouton = document.getElementById("ajout")
+        const div = document.querySelector("div")
+        let nombreEtudiants = 0
+
+        function mettreEnMajuscule(texte) {
+            texte = texte.trim()
+            return texte.charAt(0).toUpperCase() + texte.slice(1)
+        }
+
+        function sauvegarderListe() {
+            const items = []
+            ul.querySelectorAll("li").forEach(li => {
+                const elementLi = li.childNodes[0]
+                if (elementLi) {
+                    items.push(elementLi.textContent)
+                    items.sort((a, b) => a.localeCompare(b))
+                }
+            })
+            localStorage.setItem("listeEtudiants", JSON.stringify(items))
+        }
+
+        function chargerListe() {
+            nombreEtudiants = JSON.parse(localStorage.getItem("listeEtudiants")) ? JSON.parse(localStorage.getItem("listeEtudiants")).length : 0
+            const span = document.querySelector("em")
+            span.textContent = nombreEtudiants
+
+            const items = JSON.parse(localStorage.getItem("listeEtudiants")) || []
+            items.sort((a, b) => a.localeCompare(b))
+            
+            items.forEach((item) => {
+                const li = document.createElement("li")
+                li.textContent = mettreEnMajuscule(item)
+
+                const allButtons = document.createElement("span")
+                const croix = document.createElement("button")
+                const edit = document.createElement("button")
+                croix.textContent = "❌"
+                edit.textContent = "✏️"
+
+                li.classList.add("styliste")
+                croix.classList.add("croix")
+                edit.classList.add("croix")
+                allButtons.classList.add("allButtons")
+
+                allButtons.append(croix)
+                allButtons.append(edit)
+                li.append(allButtons)
+
+                croix.addEventListener("click", (event) => {
+                    li.remove()
+                    nombreEtudiants--
+                    span.textContent = nombreEtudiants
+                    sauvegarderListe()
+                })
+
+                edit.addEventListener("click", (event) => {
+                    const nouveauNom = prompt("Entrez le nouveau nom qui remplace (" + li.textContent.slice(0, li.textContent.length - 3) + ")")
+                    li.textContent = nouveauNom.charAt(0).toUpperCase() + nouveauNom.slice(1)
+                    allButtons.append(croix)
+                    allButtons.append(edit)
+                    li.append(allButtons)
+                    sauvegarderListe()
+                    chargerListe()
+                })
+                ul.append(li)
+            })
+        }
+
+        function ajouterEtudiant() {
+
+            const zoneDeTexte = document.querySelector("input")
+            const form = document.getElementById("form")
+            const ul = document.getElementById("liste")
+            const bouton = document.getElementById("ajout")
+            const div = document.querySelector("div")
+
+            if (zoneDeTexte.value.trim() === "") {
+                return
+            }
+
+            if (zoneDeTexte.value.trim() === " ") {
+                zoneDeTexte.style.borderColor = "red"
+                zoneDeTexte.value = ""
+                return
+            }
+        
+            const span = document.querySelector("em")
+            nombreEtudiants ++
+            span.textContent = nombreEtudiants
+
+            const li = document.createElement("li")
+            let nom = zoneDeTexte.value
+            li.textContent = mettreEnMajuscule(nom)
+
+            form.addEventListener("submit", (event) => {
+                event.preventDefault()
+            })
+
+            const allButtons = document.createElement("span")
+            const croix = document.createElement("button")
+            const edit = document.createElement("button")
+            croix.textContent = "❌"
+            edit.textContent = "✏️"
+
+            li.classList.add("styliste")
+            croix.classList.add("croix")
+            edit.classList.add("croix")
+            allButtons.classList.add("allButtons")
+
+            allButtons.append(croix)
+            allButtons.append(edit)
+            li.append(allButtons)
+
+            croix.addEventListener("click", (event) => {
+                li.remove()
+                nombreEtudiants--
+                span.textContent = nombreEtudiants
+                sauvegarderListe()
+            })
+
+            edit.addEventListener("click", (event) => {
+                const nouveauNom = prompt("Entrez le nouveau nom qui remplace (" + li.textContent.slice(0, li.textContent.length - 3) + ")")
+                li.textContent = nouveauNom.charAt(0).toUpperCase() + nouveauNom.slice(1)
+                allButtons.append(croix)
+                allButtons.append(edit)
+                li.append(allButtons)
+                sauvegarderListe()
+            })
+            ul.append(li)
+            zoneDeTexte.value = ""
+            sauvegarderListe()
+        }
+        document.addEventListener("DOMContentLoaded", chargerListe)
+    </script>
+</body>
+</html>
