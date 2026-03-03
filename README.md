@@ -110,3 +110,7 @@ On récupère l'heure grace à ``new Date()`` puis on définit l'heure, la minut
  ```
 Puis on définit l'heure finale en concatenant les 3 périodes et on l'affecte à l'objet du DOM grace à ``textContent``.
 <video src="Capture.mp4" controls></video>
+
+## IV-Liste de classe
+Le code ci-dessous décrit à été utilisé pour la liste de classe
+### 1-
